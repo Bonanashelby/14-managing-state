@@ -1,7 +1,8 @@
 (function() {
   const newArticle = {};
-
+  // Done:
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  // initNewArticlePage is assigned a function that shows, hides and then uses a .on to focus on this selected element. The next .on uses the change on newArticle.create.
   newArticle.initNewArticlePage = function() {
     $('.tab-content').show();
     $('#export-field').hide();

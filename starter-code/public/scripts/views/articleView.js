@@ -2,8 +2,9 @@
 
 (function(module) {
   const articleView = {};
-
+  // Done:
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  //This function const render is taking some Handlebars and compiling the information from article template in the Handlebars template and then it calculates the days ago using the new date method. Then it gets the status of publishedOn and then returns the date that we determined or draft if it is not determined. And then it converts the code in the body to a special format based off the marked.js and then it return the article. 
   const render = function(article) {
     let template = Handlebars.compile($('#article-template').text());
 

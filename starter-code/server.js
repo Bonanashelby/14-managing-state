@@ -8,7 +8,7 @@ const requestProxy = require('express-request-proxy'); // REVIEW: We've added a 
 const PORT = process.env.PORT || 3000;
 const app = express();
 // const conString = 'postgres://USERNAME:PASSWORD@HOST:PORT';
-const conString = ''; // TODO: Don't forget to set your own conString
+const conString = 'postgres://localhost:5432';
 const client = new pg.Client(conString);
 client.connect();
 client.on('error', function(error) {
@@ -18,9 +18,10 @@ client.on('error', function(error) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./public'));
-
+// Done:
 // COMMENT: What is this function doing? Why do we need it? Where does it receive a request from?
 // (put your response in a comment here)
+// The proxyGitHub function passes the two parameters request and response through to get the url and pass our GITHUB_TOKEN and then it calls the request and response.
 function proxyGitHub(request, response) {
   console.log('Routing GitHub request for', request.params[0]);
   (requestProxy({
@@ -33,9 +34,10 @@ function proxyGitHub(request, response) {
 app.get('/', (request, response) => response.sendFile('index.html', {root: '.'}));
 app.get('/new', (request, response) => response.sendFile('new.html', {root: '.'}));
 app.get('/github/*', proxyGitHub);
-
+// Done:
 // COMMENT: What is this route doing? Where does it receive a request from?
 // (put your response in a comment here)
+// app.get sends an ajax request at port articles/find to the let sql query, where we select all articles table and joins it with the authors table.
 app.get('/articles/find', (request, response) => {
   let sql = `SELECT * FROM articles
             INNER JOIN authors
@@ -46,9 +48,10 @@ app.get('/articles/find', (request, response) => {
   .then(result => response.send(result.rows))
   .catch(console.error);
 })
-
+//  Done:
 // COMMENT: What is this route doing? Where does it receive a request from?
 // (put your response in a comment here)
+// app.get is an ajax request to port categories which uses a client.query to select a distinct category from articles, then takes the results and sends it to result.rows.
 app.get('/categories', (request, response) => {
   client.query(`SELECT DISTINCT category FROM articles;`)
   .then(result => response.send(result.rows))
@@ -90,9 +93,10 @@ app.post('/articles', (request, response) => {
   .then(() => response.send('Insert complete'))
   .catch(console.error);
 });
-
+// Done:
 // COMMENT: What is this route doing? Where does it receive a request from?
 // (put your response in a comment here)
+// is an ajax put request to port articles/:id with a client query to updates the information to the authors and the articles tables using sql.
 app.put('/articles/:id', (request, response) => {
   client.query(`
     UPDATE authors
