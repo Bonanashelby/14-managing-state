@@ -17,14 +17,16 @@
   //
   //   return template(this);
   // };
-
+  // Done:
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  // This function is sorting the dated by the date publishedOn. And then appends the articles to the page sorted by date.
   Article.loadAll = rows => {
     rows.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)));
     Article.all = rows.map(ele => new Article(ele));
   };
-
+  // Done:
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  // The fetchAll is being assigned to a function callback and is using the .get method to retrieve /articles and then using the results function to access the Article.loadAll with the results. And finally we call the callback function.
   Article.fetchAll = callback => {
     $.get('/articles')
     .then(
@@ -58,8 +60,9 @@
                         return names;
                       }, []);
   };
-
+  // Done:
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  // This function is declaring an undefined function and returning the Article.allAuthors function and uses a .map to create an author function that returns object with the properties name & numWords.
   Article.numWordsByAuthor = () => {
     return Article.allAuthors().map(author => {
       return {
@@ -79,8 +82,9 @@
     }
   };
 
-
+    // Done:
     // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?Article.truncateTable = callback => {
+    // Making an ajax call for the url of /articles with the delete method and then it calls the callback function. 
     $.ajax({
       url: '/articles',
       method: 'DELETE',

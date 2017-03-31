@@ -2,8 +2,9 @@
 
 (function(module) {
   const articleController = {};
-
+  // Done:
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  // The articleController.index is assigned to function with the parameter ctx which returns the articleView.index with the ctx.article's as an argument. ctx.articles is set to article and the next() function gets called moving on to the next callback.
   articleController.index = (ctx) => articleView.index(ctx.articles);
 
   // REVIEW: Middleware for grabbing one article by ID:
@@ -12,8 +13,9 @@
       ctx.articles = article;
       next();
     };
-
+  // Done:
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  // This function is accessing the Article.findWhere function in article.js and it is taking article_id and articleData and is passing in these arguments into the field and value. 
     Article.findWhere('article_id', ctx.params.article_id, articleData);
   };
 

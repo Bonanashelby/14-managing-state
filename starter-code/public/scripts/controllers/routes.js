@@ -10,6 +10,7 @@ page('/author', '/');
 
 page('/author/:authorName', articleController.loadByAuthor, articleController.index);
 page('/category/:categoryName', articleController.loadByCategory, articleController.index);
-
+//  Done:
 // COMMENT: What is this function doing?
+// It's calling the page.js
 page();
